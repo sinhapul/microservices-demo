@@ -89,7 +89,7 @@
                 <configuration>
                     <mainClass>com.microservices.demo.twitter.to.kafka.service.TwitterToKafkaServiceApplication</mainClass>
                 </configuration>
-                <executions>
+               <executions>
                     <execution>
                         <goals>
                             <goal>repackage</goal>
