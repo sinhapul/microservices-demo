@@ -14,6 +14,18 @@
     <dependencies>
         <dependency>
             <groupId>com.microservices.demo</groupId>
+            <artifactId>elastic-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.microservices.demo</groupId>
+            <artifactId>elastic-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.microservices.demo</groupId>
+            <artifactId>elastic-index-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.microservices.demo</groupId>
             <artifactId>kafka-consumer</artifactId>
         </dependency>
         <dependency>
@@ -44,15 +56,31 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+        </dependency>
+
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
+  <build>
+
+<plugins>
+      <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <configuration>
+              <mainClass>com.microservices.demo.kafka.to.elastic.service.KafkaToElasticServiceApplication</mainClass>
+          </configuration>
+          <executions>
+              <execution>
+                  <goals>
+                      <goal>repackage</goal>
+                  </goals>
+              </execution>
+          </executions>
+      </plugin>
+  </plugins>
     </build>
 
 
