@@ -1,8 +1,8 @@
 package com.microservices.demo.elastic.query.service.api;
 
 import com.microservices.demo.elastic.query.service.business.ElasticQueryService;
-import com.microservices.demo.elastic.query.service.model.ElasticQueryServiceRequestModel;
-import com.microservices.demo.elastic.query.service.model.ElasticQueryServiceResponseModel;
+import com.microservices.demo.elastic.query.service.common.model.ElasticQueryServiceRequestModel;
+import com.microservices.demo.elastic.query.service.common.model.ElasticQueryServiceResponseModel;
 import com.microservices.demo.elastic.query.service.model.ElasticQueryServiceResponseModelV2;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,13 +11,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
+@PreAuthorize("isAuthenticated()")
 @RestController
 @RequestMapping(value = "/documents", produces = "application/vnd.api.v1+json")
 public class ElasticDocumentController {
@@ -29,11 +32,14 @@ public class ElasticDocumentController {
         this.elasticQueryService = queryService;
     }
 
+    @Value("${server.port}")
+    private String port;
+
     @Operation(summary = "Get all elastic documents.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful response.", content = {
                     @Content(mediaType = "application/vnd.api.v1+json",
-                             schema = @Schema(implementation = ElasticQueryServiceResponseModel.class)
+                            schema = @Schema(implementation = ElasticQueryServiceResponseModel.class)
                     )
             }),
             @ApiResponse(responseCode = "400", description = "Not found."),
@@ -63,7 +69,7 @@ public class ElasticDocumentController {
     ResponseEntity<ElasticQueryServiceResponseModel>
     getDocumentById(@PathVariable @NotEmpty String id) {
         ElasticQueryServiceResponseModel elasticQueryServiceResponseModel = elasticQueryService.getDocumentById(id);
-        LOG.debug("Elasticsearch returned document with id {}", id);
+        LOG.debug("Elasticsearch returned document with id {} on port {}", id, port);
         return ResponseEntity.ok(elasticQueryServiceResponseModel);
     }
 
@@ -83,10 +89,11 @@ public class ElasticDocumentController {
     getDocumentByIdV2(@PathVariable @NotEmpty String id) {
         ElasticQueryServiceResponseModel elasticQueryServiceResponseModel = elasticQueryService.getDocumentById(id);
         ElasticQueryServiceResponseModelV2 responseModelV2 = getV2Model(elasticQueryServiceResponseModel);
-        LOG.debug("Elasticsearch returned document with id {}", id);
+        LOG.debug("Elasticsearch returned document with id {} on port {}", id, port);
         return ResponseEntity.ok(responseModelV2);
     }
 
+    @PreAuthorize("hasRole('APP_USER_ROLE') || hasAuthority('SCOPE_APP_USER_ROLE')")
     @Operation(summary = "Get elastic document by text.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successful response.", content = {
@@ -103,7 +110,7 @@ public class ElasticDocumentController {
     getDocumentByText(@RequestBody @Valid ElasticQueryServiceRequestModel elasticQueryServiceRequestModel) {
         List<ElasticQueryServiceResponseModel> response =
                 elasticQueryService.getDocumentByText(elasticQueryServiceRequestModel.getText());
-        LOG.info("Elasticsearch returned {} of documents", response.size());
+        LOG.info("Elasticsearch returned {} of documents on port {}", response.size(), port);
         return ResponseEntity.ok(response);
     }
 

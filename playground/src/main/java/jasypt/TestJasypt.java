@@ -12,7 +12,7 @@ public class TestJasypt {
         standardPBEStringEncryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
         standardPBEStringEncryptor.setIvGenerator(new RandomIvGenerator());
        //String result = standardPBEStringEncryptor.encrypt("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");
-        String result = standardPBEStringEncryptor.encrypt("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");
+        String result = standardPBEStringEncryptor.encrypt("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");
         System.out.println(result);
         System.out.println(standardPBEStringEncryptor.decrypt(result));
 
