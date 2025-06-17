@@ -9,7 +9,7 @@ spring:
           uri: https://github.com/sinhapul/spring-cloud-config-server-repository
           default-label: main
           username: sinhapul
-          password: ENC(oR3QywNRua0klknUp+FdBMCS3WwhbhSSrYfdsevjQGgcosU/3WZomoAHedoiC46gIpw0ORTygkMLJIECx3kedISJ4cNprVWIpwORvRpvfao=)
+          password: ENC(vFeIh9X44MU0GcoKsbVfRqFcvXlaEMe8oghJekfm+N9ygggKxgYIzuUaNJORRpVGaAUiMeSGj87O//1qbiQZcbPdl3QUvUgagJ1ovuwxVww=)
           clone-on-start: true
     fail-fast: true
   security:
