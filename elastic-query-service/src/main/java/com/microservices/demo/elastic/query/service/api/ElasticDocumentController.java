@@ -97,7 +97,7 @@ public class ElasticDocumentController {
     }
 
 
-    @PreAuthorize("hasRole('APP_USER_ROLE') || hasRole('APP_SUPER_USER_ROLE') || hasAuthority('SCOPE_APP_USER_ROLE')")
+   @PreAuthorize("hasRole('APP_USER_ROLE') || hasRole('APP_SUPER_USER_ROLE') || hasAuthority('SCOPE_APP_USER_ROLE')")
     @PostAuthorize("hasPermission(returnObject, 'READ')")
     @Operation(summary = "Get elastic document by text.")
     @ApiResponses(value = {
