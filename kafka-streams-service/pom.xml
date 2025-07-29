@@ -68,20 +68,18 @@
     </dependencies>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <image>
-                        <name>${project.groupId}/kafka.streams.service:${project.version}</name>
-                    </image>
+                    <mainClass>com.microservices.demo.kafka.streams.service.KafkaStreamsServiceApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>install</phase>
                         <goals>
-                            <goal>build-image</goal>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
