@@ -150,8 +150,8 @@ services:
       - "SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI=http://keycloak-authorization-server:9091/auth/realms/microservices-realm"
       - "SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI=http://keycloak-authorization-server:9091/auth/realms/microservices-realm/protocol/openid-connect/certs"
       - "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_TOKEN-URI=http://keycloak-authorization-server:9091/auth/realms/microservices-realm/protocol/openid-connect/token"
-      #- "SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true"
-      #- "SPRING_DATASOURCE_INITIALIZATION-MODE=never"
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=public&binaryTransfer=true&reWriteBatchedInserts=true"
+      - "SPRING_DATASOURCE_INITIALIZATION-MODE=never"
       - "ELASTIC-QUERY-SERVICE_QUERY-FROM-KAFKA-STATE-STORE_URI=http://kafka-streams-service:8187/kafka-streams-service/get-word-count-by-word/{word}"
       - "ENCRYPT_KEY=Demo_Pwd!2020"
     networks:
