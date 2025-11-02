@@ -11,9 +11,9 @@ services:
       - "JAVA_OPTS=-Djboss.http.port=9091"
       - "DB_VENDOR=POSTGRES"
       - "DB_ADDR=host.docker.internal"
-      - "DB_DATABASE=keycloak"
+      - "DB_DATABASE=keycloak3"
       - "DB_USER=keycloak"
-      - "DB_SCHEMA=keycloak"
+      - "DB_SCHEMA=keycloak3"
       - "DB_PASSWORD=keycloak"
     networks:
       - ${GLOBAL_NETWORK:-services}
