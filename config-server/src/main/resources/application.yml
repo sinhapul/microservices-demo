@@ -5,3 +5,24 @@ logging:
   level:
     ROOT: INFO
     org.spring.framework.cloud.config: DEBUG
+
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          #uri: file://Users/sinha/udemy/event-driven-microservices-demo/microservices-demo/config-server-repository
+          uri: https://github.com/sinhapul/spring-cloud-config-server-repository
+          default-label: main
+          username: sinhapul
+          password: '{cipher}e921e82df6e0a351599806f6d608d95faa3bd489355304d44ef39d1e4a414792'
+          clone-on-start: true
+    fail-fast: true
+  security:
+    user:
+      name: spring_cloud_user
+      password: '{cipher}d9a6f5f199f01afce4f4db8d777236bc88a81d662c30478af9a82711ef8c5e14e0d20113ceb5aba13fd49ebd6bc4ca91'
+      #password: ENC(TZC6zAs2WuGu94OTKkkERsjgoaYrwj5H4yYOMjjL5X4kJmJp6bM0/TG1H4o+tBu+o+4HtBDZ936/8DLpHnkgDQ==)
+
